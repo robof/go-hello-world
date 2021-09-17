@@ -6,8 +6,6 @@ before:
   hooks:
     # You may remove this if you don't use go modules.
     - env
-env:
-  - MG_GITHUB_OWNER="{{ if index .Env "MG_GITHUB_OWNER" }}{{ .Env.MG_GITHUB_OWNER }}{{ else }}foobar{{ endif }}""
 builds:
   -
     id: "go-hello-world"
@@ -22,8 +20,8 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "ghcr.io/{{.Env.MG_GITHUB_OWNER}}/go-hello-world:latest"
-      - "ghcr.io/{{.Env.MG_GITHUB_OWNER}}/go-hello-world:{{.Version}}"
+      - "ghcr.io/{{.Egithub.repository_owner}}/go-hello-world:latest"
+      - "ghcr.io/{{.github.repository_owner}}/go-hello-world:{{.Version}}"
     dockerfile: Dockerfile
     use: buildx
     skip_push: false
